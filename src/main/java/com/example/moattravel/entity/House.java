@@ -1,6 +1,6 @@
 package com.example.moattravel.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,7 +47,7 @@ public class House {
 	@Column(name = "created_at", insertable = false, updatable = false)
 	private Timestamp createdAt;
 
-	@Column(name = "update_at", insertable = false, updatable = false)
+	@Column(name = "updated_at", insertable = false, updatable = false)
 	private Timestamp updatedAt;
 
 }
