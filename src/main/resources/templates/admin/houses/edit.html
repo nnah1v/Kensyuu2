@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-	<th:block th:replace="~{fragment :: meta}"></th:block> 
-	<th:block th:replace="~{fragment :: styles}"></th:block> 
+	<th:block th:replace="~{fragment :: meta}"></th:block>
+	<th:block th:replace="~{fragment :: styles}"></th:block>
 
 	<title>民宿情報編集</title>
 </head>
@@ -14,24 +14,24 @@
 		<div th:replace="~{fragment :: header}"></div>
 
 		<main>
-			<div class="container pt-4 pb-5 moattravel-container"> 
+			<div class="container pt-4 pb-5 moattravel-container">
 				<div class="row justify-content-center">
 					<div class="col-xl-5 col-lg-6 col-md-8">
-						<nav class="mb-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb"> 
+						<nav class="mb-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0">
 								<li class="breadcrumb-item">
 									<a th:href="@{/admin/houses}">民宿一覧</a>
 								</li>
 								<li class="breadcrumb-item">
-									<a th:href="@{/admin/houses/__${houseEditForm.getId()}__}">民宿詳細</a>
+									<a th:href="@{/admin/houses/{id}(id=${houseEditForm.id})}">民宿詳細</a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">民宿情報編集</li> 
+								<li class="breadcrumb-item active" aria-current="page">民宿情報編集</li>
 							</ol>
 						</nav>
 
 						<h1 class="mb-4 text-center">民宿情報編集</h1>
 
-						<form method="post" th:action="@{/admin/houses/__${houseEditForm.getId()}__/update}"
+						<form method="post" th:action="@{/admin/houses/{id}/update(id=*{id})}"
 							th:object="${houseEditForm}" enctype="multipart/form-data">
 							<input type="hidden" th:field="*{id}">
 
@@ -52,7 +52,7 @@
 								</div>
 								<div class="col-md-8">
 									<div th:if="${#fields.hasErrors('imageFile')}" class="text-danger small mb-2"
-										th:errors="*{imageFile}"></div> 
+										th:errors="*{imageFile}"></div>
 									<input type="file" class="form-control" th:field="*{imageFile}">
 								</div>
 							</div>
@@ -103,7 +103,7 @@
 								</div>
 								<div class="col-md-8">
 									<div th:if="${#fields.hasErrors('postalCode')}" class="text-danger small mb-2"
-										th:errors="*{postalCode}"></div> 
+										th:errors="*{postalCode}"></div>
 									<input type="text" class="form-control" th:field="*{postalCode}">
 								</div>
 							</div>

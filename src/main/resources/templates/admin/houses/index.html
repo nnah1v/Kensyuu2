@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<th:block th:replace="~{fragment :: meta}"></th:block>
@@ -35,8 +35,6 @@
 							<span th:text="${successMessage}"></span>
 						</div>
 
-
-
 						<table class="table">
 							<thead>
 								<tr>
@@ -45,6 +43,7 @@
 									<th scope="col">郵便番号</th>
 									<th scope="col">住所</th>
 									<th scope="col">電話番号</th>
+									<th scope="col"></th>
 									<th scope="col"></th>
 								</tr>
 							</thead>
@@ -56,11 +55,50 @@
 									<td th:text="${house.getAddress()}"></td>
 									<td th:text="${house.getPhoneNumber()}"></td>
 									<td>
-										<a th:href="@{/admin/houses/__${house.getId()}__}">詳細</a>
+										<a th:href="@{/admin/houses/{id}(id=${house.getId()})}">詳細</a>
+									</td>
+									<td>
+										<a href="#" class="moattravel-link-danger" data-bs-toggle="modal"
+											th:data-bs-target="${'#deleteHouseModal' + house.getId()}">
+											削除
+										</a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+
+						<!-- 削除用モーダル -->
+						<div th:each="house : ${housePage}">
+							<div class="modal fade" th:id="${'deleteHouseModal' + house.getId()}" tabindex="-1"
+								th:aria-labelledby="${'deleteHouseModalLabel' + house.getId()}">
+
+								<div class="modal-dialog">
+									<div class="modal-content">
+
+										<div class="modal-header">
+											<h5 class="modal-title" th:id="${'deleteHouseModalLabel' + house.getId()}"
+												th:text="${house.getName() + 'を削除してもよろしいですか？'}">
+											</h5>
+
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="閉じる"></button>
+										</div>
+
+										<div class="modal-footer">
+											<form method="post"
+												th:action="@{/admin/houses/{id}/delete(id=${house.getId()})}">
+												<button type="submit"
+													class="btn moattravel-btn-danger text-white shadow-sm">
+													削除
+												</button>
+											</form>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
 
 						<!-- ページネーション -->
 						<div th:if="${housePage.getTotalPages() > 1}" class="d-flex justify-content-center">

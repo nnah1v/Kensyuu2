@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<th:block th:replace="~{fragment :: meta}"></th:block>
+	<th:block th:replace="~{fragment :: styles}"></th:block>
+
+	<title>moat Travel</title>
+</head>
+
+<body>
+	<div class="moattravel-wrapper">
+		<!-- ヘッダー -->
+		<div th:replace="~{fragment :: header}"></div>
+
+		<main>
+			<div class="container pt-4 pb-5 moattravel-container">
+
+
+				<div th:if="${param.loggedIn}" class="alert alert-info">
+					ログインしました。
+				</div>
+
+				<div th:if="${param.loggedOut}" class="alert alert-info">
+					ログアウトしました。
+				</div>
+
+				<div th:if="${successMessage}" class="alert
+				alert-info">
+					<span th:text="${successMessage}"></span>
+				</div>
+
+			</div>
+		</main>
+
+		<!-- フッター -->
+		<div th:replace="~{fragment :: footer}"></div>
+	</div>
+
+	<th:block th:replace="~{fragment :: scripts}"></th:block>
 </body>
+
 </html>
