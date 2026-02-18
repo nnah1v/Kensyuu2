@@ -9,5 +9,6 @@ import com.example.moattravel.entity.User;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 	public Page<Reservation> findByUserOrderByCreatedAtDesc(User user, Pageable pageable);
+	boolean existsByStripeSessionId(String stripeSessionId);
 
 }

@@ -44,6 +44,9 @@ public class Reservation {
 	@Column(name = "amount")
 	private Integer amount;
 	
+	@Column(name = "stripe_session_id", unique = true, nullable = false) 
+	private String stripeSessionId;
+	
 	@Column(name = "created_at", insertable = false, updatable = false)
 	private Timestamp createdAt;
 	
