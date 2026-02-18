@@ -24,7 +24,9 @@ public class WebSecurityConfig {
 								"/js/**",
 								"/storage/**",
 								"/",
-								"/signup/**") 
+								"/signup/**",
+								"/houses",
+								"/houses/{id}") 
 						.permitAll()
 						.requestMatchers("/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
